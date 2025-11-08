@@ -1,0 +1,46 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build doc",
+      "type": "shell",
+      "command": "${command:python.interpreterPath}",
+      "args": [
+        "-m",
+        "sphinx",
+        "-M",
+        "html",
+        "docs/source",
+        "docs/_build",
+        "-a"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Run coverage",
+      "type": "shell",
+      "command": "${command:python.interpreterPath}",
+      "args": ["-m", "pytest", "--cov=py61850", "--cov-report=html", "tests"]
+    },
+    {
+      "label": "Show coverage",
+      "type": "shell",
+      "command": "explorer.exe",
+      "args": ["${workspaceFolder}\\htmlcov\\index.html"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Run tests",
+      "type": "shell",
+      "dependsOrder": "sequence",
+      "dependsOn": ["Run coverage", "Show coverage"],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}
