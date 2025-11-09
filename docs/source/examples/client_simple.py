@@ -201,7 +201,7 @@ print(f"Value of IEDNameLD0/PTOC1.StrVal.setMag.f: {val}")
 # function.
 
 act_sg = ied_connection.read_uint32("IEDNameLD0/LLN0.SGCB.ActSG", FunctionalConstraint.SP)
-num_of_sgs = ied_connection.read_uint32("IEDNameLD0/LLN0.SGCB.numOfSGs", FunctionalConstraint.SP)
+num_of_sgs = ied_connection.read_uint32("IEDNameLD0/LLN0.SGCB.NumOfSG", FunctionalConstraint.SP)
 print(f"Current setting group is {act_sg}/{num_of_sgs}")
 
 
