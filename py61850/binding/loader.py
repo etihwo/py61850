@@ -11,6 +11,7 @@ from .iec61850 import (
     model,
     server,
 )
+from .logging import api as logging_api
 from .mms import mms_value
 
 
@@ -36,6 +37,8 @@ class _Wrapper:
         iec61850_common.setup_prototypes(_libiec61850)
         model.setup_prototypes(_libiec61850)
         server.setup_prototypes(_libiec61850)
+        # Logging
+        logging_api.setup_prototypes(_libiec61850)
         # MMS
         mms_value.setup_prototypes(_libiec61850)
 
