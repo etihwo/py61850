@@ -63,11 +63,7 @@ This module uses ctypes to wrap the C functions exposed by libiec61850. It handl
 
 ## Contributing
 
-Contributions are welcome! To contribute:
-
-1. Fork the repository
-1. Create a feature branch
-1. Submit a pull request
+Check out the [Contributing Guide](CONTRIBUTING.md).
 
 ## License
 
