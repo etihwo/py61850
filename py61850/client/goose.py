@@ -1,27 +1,11 @@
 """Implements function and class relative to goose on client side"""
 
 import ctypes
-import datetime
-from collections.abc import Callable
-from ctypes import byref, c_bool, c_int, c_void_p
-from enum import Enum, Flag
+from enum import Flag
 from typing import TYPE_CHECKING
 
-from ..binding.iec61850.client import CommandTerminationHandler
-from ..binding.iec61850.client import IedClientError as _cIedClientError
-from ..binding.iec61850.client import (
-    IedClientGetFileHandler,
-    IedConnection_ClosedHandler,
-    IedConnection_StateChangedHandler,
-)
-from ..binding.iec61850.client import LastApplError as _cLastApplError
-from ..binding.iec61850.client import ReportCallbackFunction
-from ..binding.iec61850.client import (
-    sClientGooseControlBlock as _sClientGooseControlBlock,
-)
-from ..binding.iec61850.client import (
-    sClientReportControlBlock as _sClientReportControlBlock,
-)
+from ..binding.iec61850.client import sClientGooseControlBlock as _sClientGooseControlBlock
+from ..binding.iec61850.client import sClientReportControlBlock as _sClientReportControlBlock
 from ..binding.loader import Wrapper
 from ..common import (
     ACSIClass,

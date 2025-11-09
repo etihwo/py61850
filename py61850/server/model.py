@@ -12,9 +12,7 @@ from ..binding.iec61850.model import IedModel as _cIedModel
 from ..binding.iec61850.model import LogicalDevice as _cLogicalDevice
 from ..binding.iec61850.model import LogicalNode as _cLogicalNode
 from ..binding.iec61850.model import ModelNode as _cModelNode
-from ..binding.iec61850.model import (
-    SettingGroupControlBlock as _cSettingGroupControlBlock,
-)
+from ..binding.iec61850.model import SettingGroupControlBlock as _cSettingGroupControlBlock
 from ..binding.loader import Wrapper
 from ..common import (
     CdcControlModelOptions,

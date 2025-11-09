@@ -11,9 +11,7 @@ from ..binding.iec61850.model import DataObject as _cDataObject
 from ..binding.iec61850.model import IedModel as _cIedModel
 from ..binding.iec61850.model import LogicalDevice as _cLogicalDevice
 from ..binding.iec61850.model import ModelNode as _cModelNode
-from ..binding.iec61850.model import (
-    SettingGroupControlBlock as _cSettingGroupControlBlock,
-)
+from ..binding.iec61850.model import SettingGroupControlBlock as _cSettingGroupControlBlock
 from ..binding.iec61850.server import (
     ActiveSettingGroupChangedHandler,
     ControlHandler,

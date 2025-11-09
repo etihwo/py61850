@@ -12,12 +12,8 @@ from ..binding.iec61850.client import (
     IedConnection_StateChangedHandler,
     ReportCallbackFunction,
 )
-from ..binding.iec61850.client import (
-    sClientGooseControlBlock as _sClientGooseControlBlock,
-)
-from ..binding.iec61850.client import (
-    sClientReportControlBlock as _sClientReportControlBlock,
-)
+from ..binding.iec61850.client import sClientGooseControlBlock as _sClientGooseControlBlock
+from ..binding.iec61850.client import sClientReportControlBlock as _sClientReportControlBlock
 from ..binding.loader import Wrapper
 from ..common import (
     ACSIClass,

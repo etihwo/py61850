@@ -25,6 +25,9 @@ classifiers = [
 ]
 
 [project.optional-dependencies]
+dev = [
+  "pre-commit",
+]
 test = [
   "pytest",
   "pytest-cov",
@@ -49,3 +52,7 @@ packages = ["py61850"]
 
 [tool.black]
 line-length = 99
+
+[tool.isort]
+profile = "black" # Ensures compatibility with Black formatter
+line_length = 99

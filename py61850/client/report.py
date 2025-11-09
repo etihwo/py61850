@@ -8,9 +8,7 @@ from enum import Flag
 from typing import TYPE_CHECKING
 
 from ..binding.iec61850.client import ReportCallbackFunction
-from ..binding.iec61850.client import (
-    sClientReportControlBlock as _sClientReportControlBlock,
-)
+from ..binding.iec61850.client import sClientReportControlBlock as _sClientReportControlBlock
 from ..binding.loader import Wrapper
 from ..common import MmsValue, ReportOptions, ReportTriggerOptions, Timestamp
 from ..helper import convert_to_bytes, convert_to_datetime

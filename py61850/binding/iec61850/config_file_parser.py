@@ -1,6 +1,5 @@
 """Module for C binding with iec61850/inc/iec61850_config_file_parser.h"""
 
-
 from ctypes import CDLL, POINTER, c_char_p, c_void_p
 
 from .model import IedModel
