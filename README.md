@@ -17,6 +17,28 @@ from py61850.binding.loader import Wrapper
 Wrapper.load_library("./iec61580.dll")
 ```
 
+To compile the libiec61850 library, you can refer to the [official documentation](https://github.com/mz-automation/libiec61850) or use the following command to compile it without any optional module.
+
+For Linux:
+
+```shell
+mkdir -p build
+cd build
+cmake ..
+make iec61850-shared
+```
+
+For Windows:
+
+```shell
+mkdir -p build
+cd build
+cmake -G "Visual Studio 17 2022" -A x64 ..
+cmake --build . --config Release
+```
+
+Or you can retrieve the release files from https://github.com/etihwo/libiec61850 which are compiled without any optional features.
+
 ## Features
 
 - Connect to IEC 61850 servers via MMS
