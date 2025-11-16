@@ -22,8 +22,8 @@ class FileDirectoryEntry:
         Wrapper.lib.FileDirectoryEntry_destroy(self._handle)
 
     @property
-    def filename(self) -> bytes:
-        """Name of the file."""
+    def filepath(self) -> bytes:
+        """Path of the file."""
         return Wrapper.lib.FileDirectoryEntry_getFileName(self._handle)
 
     @property
@@ -37,12 +37,12 @@ class FileDirectoryEntry:
         ms = Wrapper.lib.FileDirectoryEntry_getLastModified(self._handle)
         return convert_to_datetime(ms)
 
-    def download(self) -> tuple[int, bytearray]:
+    def download(self) -> bytearray:
         """Download the file
 
         Returns
         -------
-        tuple[int, bytearray]
-            Return byte received and content of the file
+        bytearray
+            Return the content of the file
         """
-        return self._ied_connection.download_file(self.filename)
+        return self._ied_connection.download_file(self.filepath)

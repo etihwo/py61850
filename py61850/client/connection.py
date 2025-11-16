@@ -1185,12 +1185,17 @@ class IedConnection:
         Returns
         -------
         list[bytes]
-            _description_
+            List of logical device name (with ied name included)
 
         Raises
         ------
         IedConnectionException
             _description_
+
+        Examples
+        --------
+        >>> ied_connection.get_logical_devices()
+        [b'TestIEDGenericIO']
         """
         _error = _cIedClientError(99)
         head = Wrapper.lib.IedConnection_getServerDirectory(self._handle, byref(_error), False)
@@ -1217,6 +1222,11 @@ class IedConnection:
         ------
         IedConnectionException
             _description_
+
+        Examples
+        --------
+        >>> ied_connection.get_logical_nodes('TestIEDGenericIO')
+        [b'GGIO1', b'LLN0', b'LPHD1']
         """
         _error = _cIedClientError(99)
         logical_device_name = convert_to_bytes(logical_device_name)
@@ -1240,17 +1250,30 @@ class IedConnection:
         logical_node_reference : str | bytes
             Logical node reference, for example "IEDNameLD0/LLN0"
         acsi_class : ACSIClass
-            _description_
+            Described which items should be retrieved
 
         Returns
         -------
         list[bytes]
-            _description_
+            Lit of name of items to be retrieved
 
         Raises
         ------
         IedConnectionException
             _description_
+
+        Examples
+        --------
+        >>> ied_connection.get_logical_node_directory('TestIEDGenericIO/LLN0',
+        ...     ACSIClass.DATA_OBJECT)
+        [b'Mod', b'NamPlt', b'Beh', b'Health']
+
+        If you want to retrieve all dataset within a logical node, you mut specify the right
+        ACSIClass.
+
+        >>> ied_connection.get_logical_node_directory('TestIEDGenericIO/LLN0',
+        ...     ACSIClass.DATA_SET)
+        [b'ControlEvents']
         """
         _error = _cIedClientError(99)
         logical_node_reference = convert_to_bytes(logical_node_reference)
@@ -1288,6 +1311,17 @@ class IedConnection:
         --------
         get_data_directory_fc
         get_data_directory_by_fc
+
+        Examples
+        --------
+        Only when level is returned by the function (i.e. to retrieve the content of `mag` the
+        function should be called with the right reference)
+
+        >>> ied_connection.get_data_directory('TestIEDGenericIO/GGIO1.AnIn1')
+        [b'mag', b'q', b't']
+
+        >>> ied_connection.get_data_directory('TestIEDGenericIO/GGIO1.AnIn1.mag')
+        [b'f']
         """
 
         _error = _cIedClientError(99)
@@ -1327,6 +1361,14 @@ class IedConnection:
         --------
         get_data_directory
         get_data_directory_by_fc
+
+        Examples
+        --------
+        >>> ied_connection.get_data_directory_fc('TestIEDGenericIO/LLN0.Mod')
+        [b'ctlModel[CF]', b'q[ST]', b't[ST]']
+
+        >>> ied_connection.get_data_directory_fc('TestIEDGenericIO/GGIO1.AnIn1')
+        [b'mag[MX]', b'q[MX]', b't[MX]']
         """
 
         _error = _cIedClientError(99)
@@ -1367,6 +1409,17 @@ class IedConnection:
         --------
         get_data_directory
         get_data_directory_fc
+
+        Examples
+        --------
+        >>> ied_connection.get_data_directory_by_fc('TestIEDGenericIO/LLN0.Mod',
+        ...     FunctionalConstraint.ST,
+            )
+        [b'q', b't']
+
+        >>> ied_connection.get_data_directory_by_fc('TestIEDGenericIO/LLN0.Mod',
+        ...     FunctionalConstraint.CF)
+        [b'ctlModel']
         """
         _error = _cIedClientError(99)
         data_reference = convert_to_bytes(data_reference)
@@ -1388,12 +1441,12 @@ class IedConnection:
         Parameters
         ----------
         logical_device_name : str | bytes
-            _description_
+            Logical device name, for example "IEDNameLD0"
 
         Returns
         -------
         list[bytes]
-            _description_
+            List of reference for each items. For example b'GGIO1$CO$SPCSO2$Oper$T'
 
         Raises
         ------
@@ -1426,7 +1479,7 @@ class IedConnection:
         Returns
         -------
         list[bytes]
-            _description_
+            List of reference for each items. For example b'GGIO1$CO$SPCSO2$Oper$T'
 
         Raises
         ------
@@ -1436,6 +1489,27 @@ class IedConnection:
         See Also
         --------
         get_logical_device_variables
+
+        Examples
+        --------
+        >>> ied_connection.get_logical_node_variables('TestIEDGenericIO/LLN0')
+        [b'CF', b'CF$Mod', b'CF$Mod$ctlModel', b'DC', b'DC$NamPlt', b'DC$NamPlt$configRev',
+        b'DC$NamPlt$d', b'DC$NamPlt$swRev', b'DC$NamPlt$vendor', b'EX', b'EX$NamPlt',
+        b'EX$NamPlt$ldNs', b'RP', b'RP$ControlEventsRCB01', b'RP$ControlEventsRCB01$BufTm',
+        b'RP$ControlEventsRCB01$ConfRev', b'RP$ControlEventsRCB01$DatSet',
+        b'RP$ControlEventsRCB01$GI', b'RP$ControlEventsRCB01$IntgPd',
+        b'RP$ControlEventsRCB01$OptFlds', b'RP$ControlEventsRCB01$Resv',
+        b'RP$ControlEventsRCB01$RptEna', b'RP$ControlEventsRCB01$RptID',
+        b'RP$ControlEventsRCB01$SqNum', b'RP$ControlEventsRCB01$TrgOps',
+        b'RP$ControlEventsRCB02', b'RP$ControlEventsRCB02$BufTm',
+        b'RP$ControlEventsRCB02$ConfRev', b'RP$ControlEventsRCB02$DatSet',
+        b'RP$ControlEventsRCB02$GI', b'RP$ControlEventsRCB02$IntgPd',
+        b'RP$ControlEventsRCB02$OptFlds', b'RP$ControlEventsRCB02$Resv',
+        b'RP$ControlEventsRCB02$RptEna', b'RP$ControlEventsRCB02$RptID',
+        b'RP$ControlEventsRCB02$SqNum', b'RP$ControlEventsRCB02$TrgOps',
+        b'ST', b'ST$Beh', b'ST$Beh$q', b'ST$Beh$stVal', b'ST$Beh$t', b'ST$Health',
+        b'ST$Health$q', b'ST$Health$stVal', b'ST$Health$t', b'ST$Mod', b'ST$Mod$q',
+        b'ST$Mod$t']
         """
         _error = _cIedClientError(99)
         logical_node_reference = convert_to_bytes(logical_node_reference)
@@ -1448,19 +1522,22 @@ class IedConnection:
         return LinkedList(head).to_string_list()
 
     def get_logical_device_datasets(self, logical_device_name: str | bytes) -> list[bytes]:
-        """Get the data set names of the logical device.
-
-        NOTE: This function will return all data set names (MMS named variable lists) of the logical device (MMS domain). The result will be in the MMS notation (like "LLN0$dataset1").
+        """Get the dataset reference of the logical device.
 
         Parameters
         ----------
-        logicalDeviceName : str
-            _description_
+        logical_device_name : str
+            Logical device name, for example "IEDNameLD0"
 
         Returns
         -------
         list[str]
-            _description_
+            List of reference for each dataset. For example b'LLN0$dataset1'
+
+        Examples
+        --------
+        >>> ied_connection.get_logical_device_datasets('TestIEDGenericIO')
+        [b'LLN0$ControlEvents']
         """
         _error = _cIedClientError(99)
         logical_device_name = convert_to_bytes(logical_device_name)
@@ -1481,17 +1558,24 @@ class IedConnection:
         Parameters
         ----------
         directory_name : str | bytes | None, optional
-            _description_, by default None
+            Path of the directory, by default None
 
         Returns
         -------
-        list[bytes]
-            _description_
+        list[FileDirectoryEntry]
+            List of ``FileDirectoryEntry`` to represent each file
 
         Raises
         ------
         IedConnectionException
             _description_
+
+        Examples
+        --------
+        To retrieve filepath of files in the base directory, you can use the following code
+
+        >>> [f.filepath for f in ied_connection.get_files()]
+        [b'comtrade/no-comtrade.txt', b'dummy.txt']
         """
         if directory_name:
             directory_name = convert_to_bytes(directory_name)
@@ -1507,20 +1591,23 @@ class IedConnection:
         handlers = LinkedList(head).to_pointer_list()
         return [FileDirectoryEntry(handler, self) for handler in handlers]
 
-    def download_file(self, filename: str | bytes) -> bytearray:
+    def download_file(self, filepath: str | bytes) -> bytearray:
         """Download the file
 
         Parameters
         ----------
-        filename : str | bytes
-            _description_
+        filepath : str | bytes
+            Path of the file to be downloaded
 
         Returns
         -------
         bytearray
             Return content of the file
+
+        >>> ied_connection.download_file('comtrade/no-comtrade.txt')
+        bytearray(b'Dummy file on the server\n')
         """
-        filename = convert_to_bytes(filename)
+        filepath = convert_to_bytes(filepath)
         _error = _cIedClientError(99)
         buffer = bytearray()
 
@@ -1534,13 +1621,13 @@ class IedConnection:
         Wrapper.lib.IedConnection_getFile(
             self._handle,  # IedConnection self,
             byref(_error),  # IedClientError* error,
-            filename,  # const char* fileName,
+            filepath,  # const char* fileName,
             handler,  # IedClientGetFileHandler handler,
             None,  # void* handlerParameter
         )
         error = IedClientError(_error.value)
         if error != IedClientError.OK:
-            raise IedConnectionException(f"Failed to download file {filename}", error)
+            raise IedConnectionException(f"Failed to download file {filepath}", error)
         return buffer
 
     def set_filestore_basepath(self, basepath: str | bytes):
@@ -1581,25 +1668,25 @@ class IedConnection:
             destination_filename,  # const char* destinationFilename
         )
 
-    def delete_file(self, filename: str | bytes):
+    def delete_file(self, filepath: str | bytes):
         """Delete the file on the server
 
         Parameters
         ----------
-        filename : str | bytes
-            _description_
+        filepath : str | bytes
+            Path of the file to be delted
 
         Raises
         ------
         IedConnectionException
             _description_
         """
-        filename = convert_to_bytes(filename)
+        filepath = convert_to_bytes(filepath)
         _error = _cIedClientError(99)
         Wrapper.lib.IedConnection_deleteFile(
             self._handle,  # IedConnection self,
             byref(_error),  # IedClientError* error,
-            filename,  # const char* fileName,
+            filepath,  # const char* fileName,
         )
         error = IedClientError(_error.value)
         if error != IedClientError.OK:

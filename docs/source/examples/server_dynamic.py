@@ -298,6 +298,11 @@ ied_server.set_filestore_basepath(os.path.join(current_file_directory, "file-sto
 
 ied_server.start(102)
 
+if ied_server.is_running:
+    print("Server is running")
+else:
+    raise RuntimeError("Server is not running")
+
 # While loop to never terminate
 
 while True:

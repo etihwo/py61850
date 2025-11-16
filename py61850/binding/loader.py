@@ -20,6 +20,17 @@ class _Wrapper:
         self._libiec61850 = None
 
     def load_library(self, name: str | None = None):
+        """Load the shared library
+
+        If default shared library locatioin is not changed, it is not necessary to call this
+        function. By default, the path of the library is "./libiec61850.so" for linux and
+        "./iec61850.dll" for windows
+
+        Parameters
+        ----------
+        name : str | None, optional
+            Name of the shared library, by default None
+        """
 
         if name is None:
             name = "./libiec61850.so" if sys.platform != "win32" else "./iec61850.dll"

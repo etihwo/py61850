@@ -2,6 +2,18 @@
 
 A Python module for interfacing with the libiec61850 C library, enabling communication with devices using the IEC 61850 protocol.
 
+## Features
+
+- Connect to IEC 61850 servers via MMS
+- Read and write Data Attributes (DA)
+- Navigate logical device structures (LD, LN, DO, DA)
+- Robust error handling and timeout management
+- Support for complex and nested data types
+
+## Documentation
+
+Full API documentation is available in the docs/ folder and can be generated using Sphinx. It is also available on https://etihwo.github.io/py61850/
+
 ## Installation and configuration
 
 ```bash
@@ -39,27 +51,11 @@ cmake --build . --config Release
 
 Or you can retrieve the release files from https://github.com/etihwo/libiec61850 which are compiled without any optional features.
 
-## Features
-
-- Connect to IEC 61850 servers via MMS
-- Read and write Data Attributes (DA)
-- Navigate logical device structures (LD, LN, DO, DA)
-- Robust error handling and timeout management
-- Support for complex and nested data types
-
 ## Dependencies
 
 - Python ≥ 3.8
 - libiec61850 (https://github.com/mz-automation/libiec61850)
 - ctypes (standard Python library)
-
-## Documentation
-
-Full API documentation is available in the docs/ folder and can be generated using Sphinx. It is also available on https://etihwo.github.io/py61850/
-
-## Technical Notes
-
-This module uses ctypes to wrap the C functions exposed by libiec61850. It handles type conversions, pointer management, and structure mapping to provide a clean Pythonic interface.
 
 ## Contributing
 

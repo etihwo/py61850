@@ -4,6 +4,7 @@
 :maxdepth: 2
 :caption: Contents:
 
+getting-started
 examples/index
 api/index
 ```

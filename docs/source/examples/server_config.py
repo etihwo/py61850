@@ -50,8 +50,13 @@ ied_server = IedServer(iedModel, config)
 
 ied_server.register_connection_change(on_connection_change)
 
-print("start")
 ied_server.start(102)
+
+if ied_server.is_running:
+    print("Server is running")
+else:
+    raise RuntimeError("Server is not running")
+
 val = 0.0
 
 while True:

@@ -298,7 +298,7 @@ print(brcba.dataset_reference)
 
 files = ied_connection.get_files()
 for file in files:
-    print(file.filename)
+    print(file.filepath)
     break
 
 content = ied_connection.download_file(b"dummy.txt")
